@@ -6,14 +6,20 @@
       </v-card-title>
       <v-card-text class="parand"
         >ویرایش عنوان این وظیفه:
-        <v-text-field v-model="taskTitle" />
+        <v-text-field v-model="taskTitle" @keyup.enter="saveTask" />
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn class="parand" text @click="$emit('close')">
           لغو
         </v-btn>
-        <v-btn class="parand" color="red darken-1" text @click="saveTask">
+        <v-btn
+          class="parand"
+          color="red darken-1"
+          text
+          @click="saveTask"
+          :disabled="taskTitleInvalid"
+        >
           ذخیره
         </v-btn>
       </v-card-actions>
@@ -29,13 +35,21 @@ export default {
       taskTitle: null,
     };
   },
+  computed: {
+    taskTitleInvalid() {
+      return !this.taskTitle || this.taskTitle === this.task.title;
+    },
+  },
   methods: {
     saveTask() {
-      let payload = {
-        id: this.task.id,
-        title: this.taskTitle,
-      };
-      this.$store.commit("updateTaskTitle", payload);
+      if (!this.taskTitleInvalid) {
+        let payload = {
+          id: this.task.id,
+          title: this.taskTitle,
+        };
+        this.$store.dispatch("updateTaskTitle", payload);
+        this.$emit("close");
+      }
     },
   },
   mounted() {

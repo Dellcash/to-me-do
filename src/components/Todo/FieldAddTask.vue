@@ -1,15 +1,19 @@
 <template>
   <v-text-field
-    @click:append="addTask"
     @keyup.enter="addTask"
     v-model="newTaskTitle"
     class="pa-4 parand"
     outlined
-    label="مینویسی؟"
-    append-icon="mdi-plus"
+    label="چیکار می‌خوایی کنی؟"
     hide-details
     clearable
-  ></v-text-field>
+  >
+    <template v-slot:append>
+      <v-icon @click="addTask" color="primary" :disabled="newTaskTitleInvalid"
+        >mdi-plus</v-icon
+      >
+    </template>
+  </v-text-field>
 </template>
 
 <script>
@@ -19,10 +23,17 @@ export default {
       newTaskTitle: "",
     };
   },
+  computed: {
+    newTaskTitleInvalid() {
+      return !this.newTaskTitle;
+    },
+  },
   methods: {
     addTask() {
-      this.$store.dispatch("addTask", this.newTaskTitle);
-      this.newTaskTitle = "";
+      if (!this.newTaskTitleInvalid) {
+        this.$store.dispatch("addTask", this.newTaskTitle);
+        this.newTaskTitle = "";
+      }
     },
   },
 };

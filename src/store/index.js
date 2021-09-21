@@ -70,6 +70,10 @@ export default new Vuex.Store({
     deleteTask({ commit }, id) {
       commit('deleteTask', id)
       commit('showSnackbar', 'فعالیت پاک شد!')
+    },
+    updateTaskTitle({ commit }, payload){
+      commit('updateTaskTitle', payload)
+      commit('showSnackbar', 'وظیفه بروز شد!')
     }
   },
   getters: {
