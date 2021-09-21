@@ -30,7 +30,6 @@
 export default {
   props: ["task"],
   components: {
-
     "task-menu": require("@/components/Todo/TaskMenu.vue").default,
   }
 };

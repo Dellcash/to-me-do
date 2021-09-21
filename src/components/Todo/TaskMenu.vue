@@ -20,6 +20,12 @@
         </v-list-item>
       </v-list>
     </v-menu>
+    
+    <dialog-edit 
+      v-if="dialogs.edit"
+      :task="task"
+      @close="dialogs.edit = false"
+    />
 
     <dialog-delete
       v-if="dialogs.delete"
@@ -31,13 +37,15 @@
 
 <script>
 export default {
-  props:['task'],
+  props: ["task"],
   components: {
+    "dialog-edit": require("@/components/Todo/Dialogs/DialogEdit.vue").default,
     "dialog-delete": require("@/components/Todo/Dialogs/DialogDelete.vue")
       .default,
   },
   data: () => ({
     dialogs: {
+      edit: false,
       delete: false,
     },
     items: [
@@ -45,7 +53,7 @@ export default {
         title: "ویرایش",
         icon: "mdi-pencil",
         click() {
-          console.log("edit");
+          this.dialogs.edit = true
         },
       },
       {
@@ -59,14 +67,14 @@ export default {
         title: "پاک کردن",
         icon: "mdi-delete",
         click() {
-          this.dialogs.delete = true
+          this.dialogs.delete = true;
         },
       },
     ],
   }),
   methods: {
     handleClick(index) {
-      this.items[index].click.call(this)
+      this.items[index].click.call(this);
     },
   },
 };
