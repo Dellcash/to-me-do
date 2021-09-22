@@ -33,19 +33,30 @@
       dark
       prominent
       src="mountains.jpg"
+      height="170"
     >
-        <template v-slot:img="{ props }">
+      <template v-slot:img="{ props }">
         <v-img
           v-bind="props"
           gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"
         ></v-img>
       </template>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-app-bar-title class="mosa">انجام بده ‌...</v-app-bar-title>
-
-      <v-spacer></v-spacer>
-        <search />
+      <v-container>
+        <v-row>
+          <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+          <v-spacer></v-spacer>
+          <search />
+        </v-row>
+        <v-row>
+          <v-app-bar-title class="mosa mr-3 pb-0" style="font-size:2.125rem"
+            >انجام بده ‌...</v-app-bar-title
+          >
+        </v-row>
+        <v-row class="mt-0">
+          <live-date-time />
+        </v-row>
+      </v-container>
     </v-app-bar>
 
     <v-main>
@@ -57,9 +68,10 @@
 
 <script>
 export default {
-  components:{
-    'snack-bar': require('@/components/Shared/Snackbar.vue').default,
-    'search': require('@/components/Tools/Search.vue').default
+  components: {
+    "snack-bar": require("@/components/Shared/Snackbar.vue").default,
+    'search': require("@/components/Tools/Search.vue").default,
+    "live-date-time": require("@/components/Tools/LiveDateTime.vue").default,
   },
   data: () => ({
     drawer: null,
@@ -99,5 +111,5 @@ export default {
 @font-face
   font-family: "Mosa"
   src: url("./fonts/Mj_Mousa.TTF")
-</style>
 
+</style>
