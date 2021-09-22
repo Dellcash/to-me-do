@@ -20,11 +20,17 @@
         </v-list-item>
       </v-list>
     </v-menu>
-    
-    <dialog-edit 
+
+    <dialog-edit
       v-if="dialogs.edit"
       :task="task"
       @close="dialogs.edit = false"
+    />
+    
+    <dialog-due-date
+      v-if="dialogs.dueDate"
+      @close="dialogs.dueDate = false"
+      :task="task"
     />
 
     <dialog-delete
@@ -40,12 +46,15 @@ export default {
   props: ["task"],
   components: {
     "dialog-edit": require("@/components/Todo/Dialogs/DialogEdit.vue").default,
+    "dialog-due-date": require("@/components/Todo/Dialogs/DialogDueDate.vue")
+      .default,
     "dialog-delete": require("@/components/Todo/Dialogs/DialogDelete.vue")
       .default,
   },
   data: () => ({
     dialogs: {
       edit: false,
+      dueDate: false,
       delete: false,
     },
     items: [
@@ -53,14 +62,14 @@ export default {
         title: "ویرایش",
         icon: "mdi-pencil",
         click() {
-          this.dialogs.edit = true
+          this.dialogs.edit = true;
         },
       },
       {
-        title: "سررسید",
+        title: "تقویم",
         icon: "mdi-calendar",
         click() {
-          console.log("calendar");
+          this.dialogs.dueDate = true
         },
       },
       {
