@@ -15,7 +15,7 @@
         </v-btn>
         <v-btn
           class="parand"
-          color="red darken-1"
+          color="success"
           text
           @click="saveTask"
           :disabled="taskTitleInvalid"

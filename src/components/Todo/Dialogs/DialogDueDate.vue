@@ -12,7 +12,7 @@
       <v-btn text color="primary" @click="$emit('close')">
         لغو
       </v-btn>
-      <v-btn text color="success" @click="saveTask">
+      <v-btn text color="success" @click="saveTask" :disabled="dateInvalid">
         ذخیره
       </v-btn>
     </v-date-picker>
@@ -26,6 +26,11 @@ export default {
     return {
       date: null,
     };
+  },
+  computed:{
+    dateInvalid(){
+      return !this.date || this.date === this.task.dueDate
+    }
   },
   methods: {
     saveTask() {
