@@ -45,18 +45,7 @@
       <v-app-bar-title class="mosa">انجام بده ‌...</v-app-bar-title>
 
       <v-spacer></v-spacer>
-
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
+        <search />
     </v-app-bar>
 
     <v-main>
@@ -69,7 +58,8 @@
 <script>
 export default {
   components:{
-    'snack-bar': require('@/components/Shared/Snackbar.vue').default
+    'snack-bar': require('@/components/Shared/Snackbar.vue').default,
+    'search': require('@/components/Tools/Search.vue').default
   },
   data: () => ({
     drawer: null,
