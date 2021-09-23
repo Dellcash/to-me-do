@@ -26,7 +26,7 @@
       :task="task"
       @close="dialogs.edit = false"
     />
-    
+
     <dialog-due-date
       v-if="dialogs.dueDate"
       @close="dialogs.dueDate = false"
@@ -69,7 +69,7 @@ export default {
         title: "تقویم",
         icon: "mdi-calendar",
         click() {
-          this.dialogs.dueDate = true
+          this.dialogs.dueDate = true;
         },
       },
       {
@@ -80,12 +80,19 @@ export default {
         },
       },
       {
-        title: 'مرتب سازی',
-        icon: 'mdi-drag-horizontal-variant',
-        click(){
-          this.$store.commit('toggleSorting')
-        }
-      }
+        title: "مرتب سازی",
+        icon: "mdi-drag-horizontal-variant",
+        click() {
+          if (!this.$store.state.search) {
+            this.$store.commit("toggleSorting");
+          } else {
+            this.$store.commit(
+              "showSnackbar",
+              "نمی‌تونی هم جستجو کنی هم مرتب!!"
+            );
+          }
+        },
+      },
     ],
   }),
   methods: {

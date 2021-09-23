@@ -43,12 +43,12 @@
       dark
       prominent
       src="mountains.jpg"
-      height="170"
+      :height="$route.path === '/' ? '238' : '170'"
     >
       <template v-slot:img="{ props }">
         <v-img
           v-bind="props"
-          gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"
+          gradient="to top right, rgba(19,84,122,.7), rgba(128,208,199,.8)"
         >
         </v-img>
       </template>
@@ -67,6 +67,9 @@
         <v-row class="mt-0">
           <live-date-time />
         </v-row>
+        <v-row v-if="$route.path === '/'">
+          <field-add-task />
+        </v-row>
       </v-container>
     </v-app-bar>
 
@@ -80,6 +83,7 @@
 <script>
 export default {
   components: {
+    "field-add-task": require("@/components/Todo/FieldAddTask.vue").default,
     "snack-bar": require("@/components/Shared/Snackbar.vue").default,
     search: require("@/components/Tools/Search.vue").default,
     "live-date-time": require("@/components/Tools/LiveDateTime.vue").default,
@@ -92,7 +96,7 @@ export default {
     ],
   }),
   mounted() {
-    this.$store.dispatch('getTasks')
+    this.$store.dispatch("getTasks");
   },
 };
 </script>
@@ -100,7 +104,7 @@ export default {
 <style lang="sass" scoped>
 .header-container
   max-width: none !important
-  
+
 .row + .row
     margin-top: 8px
 

@@ -2,14 +2,14 @@
   <v-text-field
     @keyup.enter="addTask"
     v-model="newTaskTitle"
-    class="pa-4 parand"
+    class="pa-4 field-add-task"
     outlined
-    label="چیکار می‌خوایی کنی؟"
+    placeholder="چیکار می‌خوایی کنی؟"
     hide-details
     clearable
   >
     <template v-slot:append>
-      <v-icon @click="addTask" color="primary" :disabled="newTaskTitleInvalid"
+      <v-icon @click="addTask" :disabled="newTaskTitleInvalid"
         >mdi-plus</v-icon
       >
     </template>
@@ -40,6 +40,9 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.parand
-  font-family: "Parand"
+  .field-add-task
+    font-family: 'Parand'
+    .v-input--is-focused
+      .v-input__slot
+        background: rgba(31,94,129, 0.5) !important
 </style>
