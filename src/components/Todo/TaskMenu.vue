@@ -80,7 +80,7 @@ export default {
         },
       },
       {
-        title: 'مرتب کردن',
+        title: 'مرتب سازی',
         icon: 'mdi-drag-horizontal-variant',
         click(){
           this.$store.commit('toggleSorting')
