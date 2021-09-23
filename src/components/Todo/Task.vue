@@ -3,6 +3,8 @@
     <v-list-item
       @click="$store.commit('doneTask', task.id)"
       :class="{ 'blue lighten-5': task.done }"
+      class="white"
+      :ripple="false"
     >
       <template v-slot:default>
         <v-list-item-action>
@@ -27,6 +29,12 @@
         <v-list-item-action>
           <task-menu :task="task" />
         </v-list-item-action>
+
+        <v-list-item-action v-if="$store.state.sorting">
+          <v-btn class="handle" color="primary" icon >
+            <v-icon>mdi-drag-horizontal-variant</v-icon>
+          </v-btn>
+        </v-list-item-action>
       </template>
     </v-list-item>
     <v-divider></v-divider>
@@ -34,14 +42,14 @@
 </template>
 
 <script>
-import { format } from 'date-fns-jalali'
+import { format } from "date-fns-jalali";
 
 export default {
   props: ["task"],
   filters: {
     newDate(value) {
-      return format(new Date(value), 'd MMMM')
-    }
+      return format(new Date(value), "d MMMM");
+    },
   },
   components: {
     "task-menu": require("@/components/Todo/TaskMenu.vue").default,
@@ -58,4 +66,10 @@ export default {
 
 .mosa
   font-family: "Mosa"
+
+.sortable-ghost
+  opacity: 0
+
+.sortable-drag
+  box-shadow: 0 0 10px rgba(0,0,0,.3)
 </style>

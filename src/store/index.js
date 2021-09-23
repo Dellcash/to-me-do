@@ -28,8 +28,9 @@ export default new Vuex.Store({
     ],
     snackbar: {
       show: false,
-      text: 'شت'
-    }
+      text: ''
+    },
+    sorting: false
   },
   mutations: {
     setSearch(state, value) {
@@ -59,6 +60,9 @@ export default new Vuex.Store({
       let task = state.tasks.filter((task) => task.id === payload.id)[0];
       task.dueDate = payload.dueDate
     },
+    setTasks(state, tasks){
+      state.tasks = tasks
+    },
     showSnackbar(state, text) {
       let timeout = 0
       if (state.snackbar.show) {
@@ -73,6 +77,9 @@ export default new Vuex.Store({
     hideSnackbar(state) {
       state.snackbar.show = false
     },
+    toggleSorting(state){
+      state.sorting = !state.sorting
+    }
   },
   actions: {
     addTask({ commit }, newTaskTitle) {
