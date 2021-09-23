@@ -97,6 +97,7 @@ export default {
 <style lang="sass" scoped>
 .header-container
   max-width: none !important
+  
 .row + .row
     margin-top: 8px
 

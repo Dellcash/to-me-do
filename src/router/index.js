@@ -7,12 +7,12 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'وظیفه',
     component: Todo
   },
   {
     path: '/about',
-    name: 'About',
+    name: 'درباره',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -22,6 +22,11 @@ const routes = [
 
 const router = new VueRouter({
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  document.title = `برام‌انجام‌میدی -- ${to.name}`
+  next()
 })
 
 export default router
